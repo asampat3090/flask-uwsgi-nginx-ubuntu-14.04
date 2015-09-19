@@ -6,16 +6,13 @@ sudo apt-get --yes --force-yes install python-pip python-dev nginx
 sudo pip install virtualenv
 
 # Request the Flask code directory
-echo "Please input the folder containing the flask code: "
-read DIR
+read -p  "Please input the folder containing the flask code: " DIR
 
 # Request the user name
-echo "Please input the user to host the website: "
-read USER
+read -p "Please input the user to host the website: " USER
 
 # Request the public server domain of the website
-echo "Please input the public server domain of the website: "
-read DOMAIN
+read -p "Please input the public server domain of the website: " DOMAIN
 
 # Copy over .ini file from folder to DIR
 sudo sed 's/<myproject>/'$DIR'/g' config.ini > ~/$DIR/$DIR.ini
