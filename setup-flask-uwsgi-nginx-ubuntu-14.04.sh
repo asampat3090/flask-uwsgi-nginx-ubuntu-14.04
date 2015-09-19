@@ -8,6 +8,7 @@ sudo pip install virtualenv
 # Request the Flask code directory
 echo "Please input the folder containing the flask code: "
 read DIR
+
 # Request the user name
 echo "Please input the user to host the website: "
 read USER
@@ -17,19 +18,19 @@ echo "Please input the public server domain of the website: "
 read DOMAIN
 
 # Copy over .ini file from folder to DIR
-sed 's/<myproject>/'$DIR'/g' config.ini > ~/$DIR/$DIR.ini
+sudo sed 's/<myproject>/'$DIR'/g' config.ini > ~/$DIR/$DIR.ini
 
 # Copy over wsgi.py file from folder to DIR
-sed 's/<myproject>/'$DIR'/g' wsgi.py > ~/$DIR/wsgi.py
+sudo sed 's/<myproject>/'$DIR'/g' wsgi.py > ~/$DIR/wsgi.py
 
 # Copy over Upstart file
-sed 's/<user>/'$USER'/g' upstart.conf > /etc/init/$DIR.conf
-sed -i 's/<myproject>/'$DIR'/g' /etc/init/$DIR.conf
+sudo sed 's/<user>/'$USER'/g' upstart.conf > /etc/init/$DIR.conf
+sudo sed -i 's/<myproject>/'$DIR'/g' /etc/init/$DIR.conf
 
 # Copy over nginx config
-sed 's/<user>/'$USER'/g' nginx.config >/etc/nginx/sites-available/$DIR
-sed -i 's/<domain>/'$DOMAIN'/g' /etc/nginx/sites-available/$DIR
-sed -i 's/<myproject>/'$DIR'/g' /etc/nginx/sites-available/$DIR
+sudo sed 's/<user>/'$USER'/g' nginx.config >/etc/nginx/sites-available/$DIR
+sudo sed -i 's/<domain>/'$DOMAIN'/g' /etc/nginx/sites-available/$DIR
+sudo sed -i 's/<myproject>/'$DIR'/g' /etc/nginx/sites-available/$DIR
 
 # Create virtualenv
 cd ~/$DIR
