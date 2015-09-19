@@ -48,7 +48,7 @@ pip install -r requirements.txt
 deactivate
 
 # Start Upstart process
-sudo start $DIR
+sudo start $DIR &
 
 # Enable the Nginx server block config
 sudo ln -s /etc/nginx/sites-available/$DIR /etc/nginx/sites-enabled
@@ -57,6 +57,4 @@ sudo ln -s /etc/nginx/sites-available/$DIR /etc/nginx/sites-enabled
 sudo nginx -t
 
 # Start nginx server
-sudo service nginx restart
-
-
+sudo service nginx restart &
