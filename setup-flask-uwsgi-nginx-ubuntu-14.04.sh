@@ -17,23 +17,19 @@ echo "Please input the public server domain of the website: "
 read DOMAIN
 
 # Copy over .ini file from folder to DIR
-cp config.ini ~/$DIR/$DIR.ini
-sed 's/<myproject>/'$DIR'/g' ~/$DIR/$DIR.ini > ~/$DIR/$DIR.ini
+sed 's/<myproject>/'$DIR'/g' config.ini > ~/$DIR/$DIR.ini
 
 # Copy over wsgi.py file from folder to DIR
-cp wsgi.py ~/$DIR
-sed 's/<myproject>/'$DIR'/g' ~/$DIR/wsgi.py > ~/$DIR/wsgi.py
+sed 's/<myproject>/'$DIR'/g' wsgi.py > ~/$DIR/wsgi.py
 
 # Copy over Upstart file
-sudo cp upstart.conf /etc/init/$DIR.conf
-sed 's/<user>/'$USER'/g' /etc/init/$DIR.conf > /etc/init/$DIR.conf
-sed 's/<myproject>/'$DIR'/g' /etc/init/$DIR.conf > /etc/init/$DIR.conf
+sed 's/<user>/'$USER'/g' upstart.conf > /etc/init/$DIR.conf
+sed -i 's/<myproject>/'$DIR'/g' /etc/init/$DIR.conf
 
 # Copy over nginx config
-cp nginx.config /etc/nginx/sites-available/$DIR
-sed 's/<user>/'$USER'/g' /etc/nginx/sites-available/$DIR >/etc/nginx/sites-available/$DIR
-sed 's/<domain>/'$DOMAIN'/g' /etc/nginx/sites-available/$DIR > /etc/nginx/sites-available/$DIR
-sed 's/<myproject>/'$DIR'/g' /etc/nginx/sites-available/$DIR > /etc/nginx/sites-available/$DIR
+sed 's/<user>/'$USER'/g' nginx.config >/etc/nginx/sites-available/$DIR
+sed -i 's/<domain>/'$DOMAIN'/g' /etc/nginx/sites-available/$DIR
+sed -i 's/<myproject>/'$DIR'/g' /etc/nginx/sites-available/$DIR
 
 # Create virtualenv
 cd ~/$DIR
