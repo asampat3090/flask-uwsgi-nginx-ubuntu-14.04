@@ -18,22 +18,22 @@ read DOMAIN
 
 # Copy over .ini file from folder to DIR
 cp config.ini ~/$DIR/$DIR.ini
-vim -esnc '%s/<myproject>/$DIR/g|:wq' ~/$DIR/$DIR.ini
+sed 's/<myproject>/'$DIR'/g' ~/$DIR/$DIR.ini > ~/$DIR/$DIR.ini
 
 # Copy over wsgi.py file from folder to DIR
 cp wsgi.py ~/$DIR
-vim -esnc '%s/<myproject>/$DIR/g|:wq' ~/$DIR/wsgi.py
+sed 's/<myproject>/'$DIR'/g' ~/$DIR/wsgi.py > ~/$DIR/wsgi.py
 
 # Copy over Upstart file
 sudo cp upstart.conf /etc/init/$DIR.conf
-vim -esnc '%s/<user>/$USER/g|:wq' /etc/init/$DIR.conf
-vim -esnc '%s/<myproject>/$DIR/g|:wq' /etc/init/$DIR.conf
+sed 's/<user>/'$USER'/g' /etc/init/$DIR.conf > /etc/init/$DIR.conf
+sed 's/<myproject>/'$DIR'/g' /etc/init/$DIR.conf > /etc/init/$DIR.conf
 
 # Copy over nginx config
 cp nginx.config /etc/nginx/sites-available/$DIR
-vim -esnc '%s/<user>/$USER/g|:wq' /etc/nginx/sites-available/$DIR
-vim -esnc '%s/<domain>/$DOMAIN/g|:wq' /etc/nginx/sites-available/$DIR
-vim -esnc '%s/<myproject>/$DIR/g|:wq' /etc/nginx/sites-available/$DIR
+sed 's/<user>/'$USER'/g' /etc/nginx/sites-available/$DIR >/etc/nginx/sites-available/$DIR
+sed 's/<domain>/'$DOMAIN'/g' /etc/nginx/sites-available/$DIR > /etc/nginx/sites-available/$DIR
+sed 's/<myproject>/'$DIR'/g' /etc/nginx/sites-available/$DIR > /etc/nginx/sites-available/$DIR
 
 # Create virtualenv
 cd ~/$DIR
